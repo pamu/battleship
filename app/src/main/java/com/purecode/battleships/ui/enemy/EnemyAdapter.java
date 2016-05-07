@@ -1,18 +1,15 @@
-package com.purecode.battleships.ui;
+package com.purecode.battleships.ui.enemy;
 
-import android.app.Dialog;
 import android.graphics.Color;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.Switch;
 
 import com.purecode.battleships.R;
 import com.purecode.battleships.game.BattleshipGame;
-import com.purecode.battleships.ships.AircraftCarrier;
+import com.purecode.battleships.ui.SquareBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +17,10 @@ import java.util.List;
 /**
  * Created by pnagarjuna on 07/05/16.
  */
-public class CustomGridAdapter extends BaseAdapter {
-
+public class EnemyAdapter extends BaseAdapter {
     private List<SquareBox> squareBoxes = new ArrayList<>();
 
-    public CustomGridAdapter() {
+    public EnemyAdapter() {
         drawGameState();
     }
 
@@ -33,7 +29,7 @@ public class CustomGridAdapter extends BaseAdapter {
 
         int[][] grid;
 
-        grid = BattleshipGame.getInstance().getMyPlayer().getShipsGrid();
+        grid = BattleshipGame.getInstance().getOpponentPlayer().getShipsGrid();
 
         for(int i = 0; i < grid.length; i ++) {
             for(int j = 0; j < grid[0].length; j ++) {
@@ -84,28 +80,6 @@ public class CustomGridAdapter extends BaseAdapter {
             square.setBackgroundColor(Color.GRAY);
         }
 
-        square.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                final Dialog dialog = new Dialog(v.getContext());
-                dialog.setContentView(R.layout.dialog_layout);
-                dialog.setTitle("Choose Orientation");
-                final Switch switchBox = (Switch) dialog.findViewById(R.id.orientation);
-                switchBox.setChecked(true);
-                Button ok = (Button) dialog.findViewById(R.id.ok);
-                ok.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Pair pos = squareBoxes.get(position).getPosition();
-                        BattleshipGame.getInstance().getMyPlayer().positionShip(new AircraftCarrier(), pos, switchBox.isChecked());
-                        drawGameState();
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
-        });
 
         return convertView;
     }

@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         gridView = (GridView) findViewById(R.id.gridview);
         gridView.setNumColumns(10);
-        gridView.setAdapter(new CustomGridAdapter(true));
+        gridView.setAdapter(new CustomGridAdapter());
         Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,6 +19,6 @@ public class EnemyActivity extends AppCompatActivity {
         setContentView(R.layout.enemy_layout);
         gridView = (GridView) findViewById(R.id.gridview);
         gridView.setNumColumns(10);
-        gridView.setAdapter(new CustomGridAdapter(false));
+        gridView.setAdapter(new EnemyAdapter());
     }
 }
