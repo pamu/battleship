@@ -8,4 +8,5 @@ import com.purecode.battleships.players.Player;
 public interface Game {
     void start();
     void end();
+    GameState getGameState();
 }
