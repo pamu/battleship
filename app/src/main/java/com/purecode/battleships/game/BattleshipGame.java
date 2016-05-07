@@ -19,11 +19,11 @@ public class BattleshipGame implements Game {
         opponentPlayer = new OpponentPlayer();
         myChance = true;
         gameState = GameState.STARTED;
+        opponentPlayer.positionShipRandomly(new AircraftCarrier());
     }
 
     @Override
     public void start() {
-        opponentPlayer.positionShipRandomly(new AircraftCarrier());
         gameState = GameState.STARTED;
     }
 

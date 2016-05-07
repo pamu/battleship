@@ -44,20 +44,20 @@ public abstract class BattleshipPlayer implements Player {
 
     public void positionShipRandomly(GameShip gameShip) {
         if (gameShip instanceof AircraftCarrier) {
-            positionShip(gameShip, Pair.create(0, 0), true);
-//            Random random = new Random();
-//            boolean orientation = random.nextBoolean();
-//            if (orientation) {
-//                int guessedRow = random.nextInt(shipsGrid.length);
-//                int guessedCol = random.nextInt(shipsGrid[0].length - gameShip.getSize());
-//                positionShip(gameShip, Pair.create(guessedRow, guessedCol), orientation);
-//                occupiedBoxesCount += gameShip.getSize();
-//            } else {
-//                int guessedCol = random.nextInt(shipsGrid[0].length);
-//                int guessedRow = random.nextInt(shipsGrid.length - gameShip.getSize());
-//                positionShip(gameShip, Pair.create(guessedRow, guessedCol), orientation);
-//                occupiedBoxesCount += gameShip.getSize();
-//            }
+           // positionShip(gameShip, Pair.create(0, 0), true);
+            Random random = new Random();
+            boolean orientation = random.nextBoolean();
+            if (orientation) {
+                int guessedRow = random.nextInt(shipsGrid.length);
+                int guessedCol = random.nextInt(shipsGrid[0].length - gameShip.getSize());
+                positionShip(gameShip, Pair.create(guessedRow, guessedCol), orientation);
+                occupiedBoxesCount += gameShip.getSize();
+            } else {
+                int guessedCol = random.nextInt(shipsGrid[0].length);
+                int guessedRow = random.nextInt(shipsGrid.length - gameShip.getSize());
+                positionShip(gameShip, Pair.create(guessedRow, guessedCol), orientation);
+                occupiedBoxesCount += gameShip.getSize();
+            }
         } else {
             throw new UnsupportedOperationException("Other ships are not supported right now");
         }
@@ -96,6 +96,7 @@ public abstract class BattleshipPlayer implements Player {
     }
 
     public void randomFire(BattleshipPlayer battleshipPlayer) {
+        Log.e("counts", "moves " + moviesCount + " success " + successfulFireCount + " occupied " + occupiedBoxesCount);
         Random random = new Random();
         Pair<Integer, Integer> pos = Pair.create(random.nextInt(movesGrid.length), random.nextInt(movesGrid[0].length));
         if (pos.first < movesGrid.length && pos.second < movesGrid[0].length) {
