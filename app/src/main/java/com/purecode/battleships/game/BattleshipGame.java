@@ -37,7 +37,7 @@ public class BattleshipGame implements Game {
         if (myPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
             gameState = GameState.GAME_OVER;
         }
-        if (opponentPlayer.getOccupiedBoxesCount() == opponentPlayer.getSuccessfulFireCount()) {
+        if (opponentPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
             gameState = GameState.GAME_OVER;
         }
         return gameState;

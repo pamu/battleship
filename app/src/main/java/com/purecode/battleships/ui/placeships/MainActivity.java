@@ -1,5 +1,6 @@
 package com.purecode.battleships.ui.placeships;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import com.purecode.battleships.R;
 import com.purecode.battleships.game.BattleshipGame;
 import com.purecode.battleships.ui.CustomGridAdapter;
+import com.purecode.battleships.ui.playmoves.PlayMovesActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         gridView = (GridView) findViewById(R.id.gridview);
         gridView.setNumColumns(10);
-        gridView.setAdapter(new CustomGridAdapter());
+        gridView.setAdapter(new CustomGridAdapter(true));
         Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int count = BattleshipGame.getInstance().getMyPlayer().getOccupiedBoxesCount();
                 if (count > 0) {
+                    startActivity(new Intent(getApplicationContext(), PlayMovesActivity.class));
                 } else {
                     Toast.makeText(getApplicationContext(), "Cannot go ahead without placing ships", Toast.LENGTH_SHORT).show();
                 }

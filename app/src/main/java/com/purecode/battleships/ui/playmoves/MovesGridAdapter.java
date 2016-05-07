@@ -15,8 +15,6 @@ import com.purecode.battleships.game.GameState;
 import com.purecode.battleships.players.MyPlayer;
 import com.purecode.battleships.players.OpponentPlayer;
 import com.purecode.battleships.players.Player;
-import com.purecode.battleships.ships.AircraftCarrier;
-import com.purecode.battleships.ships.Battleship;
 import com.purecode.battleships.ui.SquareBox;
 
 import java.util.ArrayList;
@@ -28,14 +26,16 @@ import java.util.List;
 public class MovesGridAdapter extends BaseAdapter {
 
     private List<SquareBox> squareBoxes = new ArrayList<>();
+    HarmGridAdapter harmGridAdapter;
 
-    public MovesGridAdapter() {
+    public MovesGridAdapter(HarmGridAdapter harmGridAdapter) {
+        this.harmGridAdapter = harmGridAdapter;
         drawGameState();
     }
 
     public void drawGameState() {
         clear();
-        int[][] grid = BattleshipGame.getInstance().getMyPlayer().getShipsGrid();
+        int[][] grid = BattleshipGame.getInstance().getMyPlayer().getMovesGrid();
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
                 squareBoxes.add(new SquareBox(Pair.create(i, j), grid[i][j]));
@@ -78,7 +78,7 @@ public class MovesGridAdapter extends BaseAdapter {
         if (num == 0) {
             square.setBackgroundColor(Color.GRAY);
         } else if (num == -1) {
-            square.setBackgroundColor(Color.RED);
+            square.setBackgroundColor(Color.BLUE);
         } else if (num == 5) {
             square.setBackgroundColor(Color.GREEN);
         } else {
@@ -94,13 +94,15 @@ public class MovesGridAdapter extends BaseAdapter {
                             BattleshipGame.getInstance().getOpponentPlayer()
                     );
                     drawGameState();
+                    harmGridAdapter.drawGameState();
                     showWinner(v.getContext());
                     BattleshipGame.getInstance().setMyChance(false);
-                    BattleshipGame.getInstance().getMyPlayer().randomFire(
+                    BattleshipGame.getInstance().getOpponentPlayer().randomFire(
                             BattleshipGame.getInstance().getMyPlayer()
                     );
                     BattleshipGame.getInstance().setMyChance(true);
                     drawGameState();
+                    harmGridAdapter.drawGameState();
                     showWinner(v.getContext());
                 } else {
                     Toast.makeText(v.getContext(), "Not your turn", Toast.LENGTH_SHORT).show();
