@@ -95,6 +95,20 @@ public abstract class BattleshipPlayer implements Player {
         }
     }
 
+    public void randomFire(BattleshipPlayer battleshipPlayer) {
+        Random random = new Random();
+        Pair<Integer, Integer> pos = Pair.create(random.nextInt(movesGrid.length), random.nextInt(movesGrid.length));
+        if (pos.first < movesGrid.length && pos.second < movesGrid[0].length) {
+            if (battleshipPlayer != null) {
+                if (battleshipPlayer instanceof OpponentPlayer) {
+                    movesGrid[pos.first][pos.second] = -1;
+                    moviesCount ++;
+                    battleshipPlayer.applyFire(pos);
+                }
+            }
+        }
+    }
+
     public void applyFire(Pair<Integer, Integer> pos) {
         if(pos.first < shipsGrid.length && pos.second < shipsGrid[0].length) {
             if (shipsGrid[pos.first][pos.second] > 0) {
@@ -132,5 +146,13 @@ public abstract class BattleshipPlayer implements Player {
 
     public void setMoviesCount(int moviesCount) {
         this.moviesCount = moviesCount;
+    }
+
+    public int[][] getShipsGrid() {
+        return shipsGrid;
+    }
+
+    public int[][] getMovesGrid() {
+        return movesGrid;
     }
 }

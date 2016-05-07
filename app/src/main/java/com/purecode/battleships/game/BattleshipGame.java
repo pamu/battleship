@@ -2,6 +2,7 @@ package com.purecode.battleships.game;
 
 import com.purecode.battleships.players.MyPlayer;
 import com.purecode.battleships.players.OpponentPlayer;
+import com.purecode.battleships.players.Player;
 import com.purecode.battleships.ships.AircraftCarrier;
 
 /**
@@ -77,5 +78,17 @@ public class BattleshipGame implements Game {
             battleshipGame = new BattleshipGame();
         }
         return battleshipGame;
+    }
+
+    public Player getWinner() {
+        if (myPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
+            return myPlayer;
+        }
+
+        if (opponentPlayer.getOccupiedBoxesCount() == opponentPlayer.getSuccessfulFireCount()) {
+            return opponentPlayer;
+        }
+
+        return null;
     }
 }

@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.purecode.battleships.MainActivity"
+    tools:context=".ui.placeships.MainActivity"
     android:orientation="vertical">
 
     <TextView
@@ -22,7 +22,7 @@
     <GridView
         android:id="@+id/gridview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="410dp"
         android:columnWidth="90dp"
         android:numColumns="auto_fit"
         android:verticalSpacing="1dp"
@@ -30,5 +30,11 @@
         android:stretchMode="columnWidth"
         android:gravity="center" />
 
+    <Button
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="next"/>
 
 </LinearLayout>
