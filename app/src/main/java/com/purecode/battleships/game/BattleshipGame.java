@@ -75,11 +75,11 @@ public class BattleshipGame implements Game {
     }
 
     public Player getWinner() {
-        if (opponentPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
+        if (opponentPlayer.getOccupiedBoxesCount() == opponentPlayer.getSuccessfulFireCount()) {
             return myPlayer;
         }
 
-        if (myPlayer.getOccupiedBoxesCount() == opponentPlayer.getSuccessfulFireCount()) {
+        if (myPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
             return opponentPlayer;
         }
 
