@@ -5,6 +5,8 @@ import android.util.Pair;
 import com.purecode.battleships.ships.AircraftCarrier;
 import com.purecode.battleships.ships.GameShip;
 
+import java.util.Random;
+
 /**
  * Created by pnagarjuna on 07/05/16.
  */
@@ -23,16 +25,36 @@ public abstract class BattleshipPlayer implements Player {
                     int b = pos.second + gameShip.getSize();
                     for( int i = pos.second; i < b; i ++) {
                         shipsGrid[a][i] = gameShip.getShipId();
-                        occupiedBoxesCount ++;
+                        occupiedBoxesCount += gameShip.getSize();
                     }
                 } else {
                     int a = pos.first + gameShip.getSize();
                     int b = pos.second;
                     for(int i = pos.first; i < a; i ++) {
                         shipsGrid[i][b]  = gameShip.getShipId();
-                        occupiedBoxesCount ++;
+                        occupiedBoxesCount += gameShip.getSize();
                     }
                 }
+            }
+        } else {
+            throw new UnsupportedOperationException("Other ships are not supported right now");
+        }
+    }
+
+    public void positionShipRandomly(GameShip gameShip) {
+        if (gameShip instanceof AircraftCarrier) {
+            Random random = new Random();
+            boolean orientation = random.nextBoolean();
+            if (orientation) {
+                int guessedRow = random.nextInt(shipsGrid.length);
+                int guessedCol = random.nextInt(shipsGrid[0].length - gameShip.getSize());
+                shipsGrid[guessedRow][guessedCol] = gameShip.getShipId();
+                occupiedBoxesCount += gameShip.getSize();
+            } else {
+                int guessedCol = random.nextInt(shipsGrid[0].length);
+                int guessedRow = random.nextInt(shipsGrid.length - gameShip.getSize());
+                shipsGrid[guessedRow][guessedCol] = gameShip.getShipId();
+                occupiedBoxesCount += gameShip.getSize();
             }
         } else {
             throw new UnsupportedOperationException("Other ships are not supported right now");
@@ -88,4 +110,27 @@ public abstract class BattleshipPlayer implements Player {
         } else return false;
     }
 
+    public int getOccupiedBoxesCount() {
+        return occupiedBoxesCount;
+    }
+
+    public void setOccupiedBoxesCount(int occupiedBoxesCount) {
+        this.occupiedBoxesCount = occupiedBoxesCount;
+    }
+
+    public int getSuccessfulFireCount() {
+        return successfulFireCount;
+    }
+
+    public void setSuccessfulFireCount(int successfulFireCount) {
+        this.successfulFireCount = successfulFireCount;
+    }
+
+    public int getMoviesCount() {
+        return moviesCount;
+    }
+
+    public void setMoviesCount(int moviesCount) {
+        this.moviesCount = moviesCount;
+    }
 }
