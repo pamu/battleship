@@ -34,12 +34,6 @@ public class BattleshipGame implements Game {
 
     @Override
     public GameState getGameState() {
-        if (myPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
-            gameState = GameState.GAME_OVER;
-        }
-        if (opponentPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
-            gameState = GameState.GAME_OVER;
-        }
         return gameState;
     }
 
@@ -81,11 +75,11 @@ public class BattleshipGame implements Game {
     }
 
     public Player getWinner() {
-        if (myPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
+        if (opponentPlayer.getOccupiedBoxesCount() == myPlayer.getSuccessfulFireCount()) {
             return myPlayer;
         }
 
-        if (opponentPlayer.getOccupiedBoxesCount() == opponentPlayer.getSuccessfulFireCount()) {
+        if (myPlayer.getOccupiedBoxesCount() == opponentPlayer.getSuccessfulFireCount()) {
             return opponentPlayer;
         }
 

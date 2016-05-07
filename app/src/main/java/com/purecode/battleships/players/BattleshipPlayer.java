@@ -26,20 +26,21 @@ public abstract class BattleshipPlayer implements Player {
                     int b = pos.second + gameShip.getSize();
                     for (int i = pos.second; i < b; i++) {
                         shipsGrid[a][i] = gameShip.getShipId();
-                        occupiedBoxesCount += gameShip.getSize();
                     }
+                    occupiedBoxesCount += gameShip.getSize();
                 } else {
                     int a = pos.first + gameShip.getSize();
                     int b = pos.second;
                     for (int i = pos.first; i < a; i++) {
                         shipsGrid[i][b] = gameShip.getShipId();
-                        occupiedBoxesCount += gameShip.getSize();
                     }
+                    occupiedBoxesCount += gameShip.getSize();
                 }
             }
         } else {
             throw new UnsupportedOperationException("Other ships are not supported right now");
         }
+        Log.e("counts", "moves " + moviesCount + " success " + successfulFireCount + " occupied " + occupiedBoxesCount);
     }
 
     public void positionShipRandomly(GameShip gameShip) {
@@ -51,16 +52,15 @@ public abstract class BattleshipPlayer implements Player {
                 int guessedRow = random.nextInt(shipsGrid.length);
                 int guessedCol = random.nextInt(shipsGrid[0].length - gameShip.getSize());
                 positionShip(gameShip, Pair.create(guessedRow, guessedCol), orientation);
-                occupiedBoxesCount += gameShip.getSize();
             } else {
                 int guessedCol = random.nextInt(shipsGrid[0].length);
                 int guessedRow = random.nextInt(shipsGrid.length - gameShip.getSize());
                 positionShip(gameShip, Pair.create(guessedRow, guessedCol), orientation);
-                occupiedBoxesCount += gameShip.getSize();
             }
         } else {
             throw new UnsupportedOperationException("Other ships are not supported right now");
         }
+        Log.e("counts", "moves " + moviesCount + " success " + successfulFireCount + " occupied " + occupiedBoxesCount);
     }
 
     public boolean isValid(GameShip gameShip, Pair<Integer, Integer> pos, boolean orientation) {
@@ -93,10 +93,10 @@ public abstract class BattleshipPlayer implements Player {
                 battleshipPlayer.applyFire(pos);
             }
         }
+        Log.e("counts", "moves " + moviesCount + " success " + successfulFireCount + " occupied " + occupiedBoxesCount);
     }
 
     public void randomFire(BattleshipPlayer battleshipPlayer) {
-        Log.e("counts", "moves " + moviesCount + " success " + successfulFireCount + " occupied " + occupiedBoxesCount);
         Random random = new Random();
         Pair<Integer, Integer> pos = Pair.create(random.nextInt(movesGrid.length), random.nextInt(movesGrid[0].length));
         if (pos.first < movesGrid.length && pos.second < movesGrid[0].length) {
@@ -107,6 +107,7 @@ public abstract class BattleshipPlayer implements Player {
                 battleshipPlayer.applyFire(pos);
             }
         }
+        Log.e("counts", "moves " + moviesCount + " success " + successfulFireCount + " occupied " + occupiedBoxesCount);
     }
 
 

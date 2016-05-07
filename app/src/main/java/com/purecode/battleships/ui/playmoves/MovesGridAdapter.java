@@ -114,18 +114,18 @@ public class MovesGridAdapter extends BaseAdapter {
     }
 
     public void showWinner(Context context) {
-        if (BattleshipGame.getInstance().getGameState().equals(GameState.GAME_OVER)) {
-            Player player = BattleshipGame.getInstance().getWinner();
-            if (player == null) {
-                String msg = "";
-                if (player instanceof MyPlayer) {
-                    msg = "You won";
-                }
-                if (player instanceof OpponentPlayer) {
-                    msg = "Computer Won";
-                }
-                Toast.makeText(context,  msg, Toast.LENGTH_SHORT).show();
+
+        Player player = BattleshipGame.getInstance().getWinner();
+        if (player == null) {
+            String msg = "";
+            if (player instanceof MyPlayer) {
+                msg = "You won";
             }
+            if (player instanceof OpponentPlayer) {
+                msg = "Computer Won";
+            }
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         }
+
     }
 }
