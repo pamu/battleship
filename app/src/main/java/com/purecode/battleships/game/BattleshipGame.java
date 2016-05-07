@@ -10,13 +10,13 @@ import com.purecode.battleships.ships.AircraftCarrier;
 public class BattleshipGame implements Game {
     private MyPlayer myPlayer;
     private OpponentPlayer opponentPlayer;
-    private boolean turn;
+    private boolean myChance;
     private GameState gameState;
 
-    public BattleshipGame() {
+    private BattleshipGame() {
         myPlayer = new MyPlayer();
         opponentPlayer = new OpponentPlayer();
-        turn = true;
+        myChance = true;
         gameState = GameState.STARTED;
     }
 
@@ -40,5 +40,42 @@ public class BattleshipGame implements Game {
             gameState = GameState.GAME_OVER;
         }
         return gameState;
+    }
+
+    public MyPlayer getMyPlayer() {
+        return myPlayer;
+    }
+
+    public void setMyPlayer(MyPlayer myPlayer) {
+        this.myPlayer = myPlayer;
+    }
+
+    public OpponentPlayer getOpponentPlayer() {
+        return opponentPlayer;
+    }
+
+    public void setOpponentPlayer(OpponentPlayer opponentPlayer) {
+        this.opponentPlayer = opponentPlayer;
+    }
+
+    public boolean isMyChance() {
+        return myChance;
+    }
+
+    public void setMyChance(boolean myChance) {
+        this.myChance = myChance;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    private static BattleshipGame battleshipGame;
+
+    public static BattleshipGame getInstance() {
+        if (battleshipGame == null) {
+            battleshipGame = new BattleshipGame();
+        }
+        return battleshipGame;
     }
 }
