@@ -117,7 +117,7 @@ public class MovesGridAdapter extends BaseAdapter {
     public void showWinner(Context context) {
 
         Player player = BattleshipGame.getInstance().getWinner();
-        if (player == null) {
+        if (player != null) {
             String msg = "";
             if (player instanceof MyPlayer) {
                 msg = "You won";
