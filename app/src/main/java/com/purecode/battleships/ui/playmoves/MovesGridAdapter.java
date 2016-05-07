@@ -2,6 +2,7 @@ package com.purecode.battleships.ui.playmoves;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,6 +125,7 @@ public class MovesGridAdapter extends BaseAdapter {
             if (player instanceof OpponentPlayer) {
                 msg = "Computer Won";
             }
+            if (!TextUtils.isEmpty(msg))
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
         }
 
